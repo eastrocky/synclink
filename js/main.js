@@ -147,24 +147,14 @@ inputField.addEventListener("input", (event) => {
     const magicLink = new URL(window.location.href)
     magicLink.search = Resource.toQueryParameters(resource)
 
-    var magicLinkOutput = document.createElement('textarea')
+    var magicLinkOutput = document.createElement('a')
+    magicLinkOutput.setAttribute('href', magicLink.toString())
     magicLinkOutput.appendChild(document.createTextNode(magicLink.toString()))
-
-    magicLinkOutput.addEventListener("click", (event) => {
-        event.preventDefault()
-        event.target.setSelectionRange(0, event.target.textLength)
-        try {
-            navigator.clipboard.writeText(event.target.value)
-            hint.innerText = "✨ Copied link to clipboard."
-        } catch (err) {
-            hint.innerText = "❌ Failed to copy link to clipboard."
-        }
-
-    })
+    magicLinkOutput.setAttribute('target', '_blank')
 
     const linkDiv = document.querySelector('div.synclink')
-    const existingLink = document.querySelector('div.synclink textarea')
-    hint.innerHTML = "👇 Here's your magic link! Anyone visiting this link will be automatically synchronized."
+    const existingLink = document.querySelector('div.synclink a')
+    hint.innerHTML = "👇 Here's your magic link! Copy and send this to someone and they will be automatically synchronized."
     if (existingLink) {
         linkDiv.replaceChild(magicLinkOutput, existingLink)
     } else {
