@@ -140,7 +140,7 @@ inputField.addEventListener("input", (event) => {
     }
 
     if (!resource) {
-        hint.innerText = "😓 I can't sync that yet. Check the supported providers list."
+        hint.innerText = "😓 I can't sync that yet. Try a YouTube link."
         return
     }
 
